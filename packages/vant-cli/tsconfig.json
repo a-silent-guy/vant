@@ -3,7 +3,7 @@
   "compilerOptions": {
     "target": "ES2019",
     "outDir": "./lib",
-    "declaration": true
+    "declaration": true,
   },
   "include": ["src/**/*"],
   "exclude": ["**/node_modules", "**/.*/"]

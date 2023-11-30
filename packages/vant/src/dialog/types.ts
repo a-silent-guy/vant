@@ -2,7 +2,14 @@ import type { CSSProperties, TeleportProps } from 'vue';
 import type { Interceptor, Numeric } from '../utils';
 
 export type DialogTheme = 'default' | 'round-button';
-export type DialogAction = 'confirm' | 'cancel';
+export type DialogAction = 'confirm' | 'cancel' | 'destructive' | 'default';
+export type FooterActions = {
+  text: string;
+  color?: string;
+  type?: DialogAction;
+  disabled?: boolean;
+  action?: () => void;
+};
 export type DialogMessage = string | (() => JSX.Element);
 export type DialogMessageAlign = 'left' | 'center' | 'right' | 'justify';
 

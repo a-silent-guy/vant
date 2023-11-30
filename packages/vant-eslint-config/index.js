@@ -11,6 +11,9 @@ module.exports = {
     ecmaVersion: 2019,
     sourceType: 'module',
     extraFileExtensions: ['.vue'],
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
 
   plugins: ['@typescript-eslint'],

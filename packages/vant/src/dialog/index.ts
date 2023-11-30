@@ -8,6 +8,7 @@ export {
   showDialog,
   closeDialog,
   showConfirmDialog,
+  showDestructiveDialog,
   setDialogDefaultOptions,
   resetDialogDefaultOptions,
 } from './function-call';

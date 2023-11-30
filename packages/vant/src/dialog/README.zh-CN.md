@@ -71,6 +71,43 @@ showConfirmDialog({
   });
 ```
 
+### 消息警示
+
+用于警示消息，默认包含警示操作和取消按钮。
+
+```js
+import { showDestructiveDialog } from 'vant';
+
+showDestructiveDialog({
+  title: '标题',
+  message:
+    '如果解决方法是丑陋的，那就肯定还有更好的解决方法，只是还没有发现而已。',
+})
+  .then(() => {
+    // on Destructive
+  })
+  .catch(() => {
+    // on cancel
+  });
+```
+
+### 长文本消息
+
+用于展示长消息。
+
+```js
+import { showDialog } from 'vant';
+
+showDialog({
+  title: '标题',
+  message:
+    '生活是一位睿智的长者，生活是一位博学的老师，它常常春风化雨，润物无声地为我们指点迷津，给我们人生的启迪。你说帘外海棠，锦屏鸳鸯；后来庭院春深，咫尺画堂。 你说笛声如诉，费尽思量；后来茶烟尚绿，人影茫茫。 你说可人如玉，与子偕臧；后来长亭远望，夜色微凉。 你说霞染天光，陌上花开与谁享；后来烟笼柳暗，湖心水动影无双。 你说彼岸灯火，心之所向；后来渔舟晚唱，烟雨彷徨。 你 说水静莲香，惠风和畅；后来云遮薄月，清露如霜。 你说幽窗棋罢，再吐衷肠；后来风卷孤松，雾漫山冈。 你说红袖佯嗔，秋波流转思张敞；后来黛眉长敛，春色飘零别阮郎。 你说暗香浮动，刹那光芒；后来玉殒琼碎，疏影横窗。 你说良辰美景，乘兴独往；后来红尘紫陌，雪落太行。 你说赋尽高唐，三生石上；后来君居淄右，妾家河阳。 你说玉楼朱颜，飞月流觞迎客棹；后来幽谷居士，枕琴听雨卧禅房',
+  longText: true,
+}).then(() => {
+  // on close
+});
+```
+
 ### 圆角按钮风格
 
 将 theme 选项设置为 `round-button` 可以展示圆角按钮风格的弹窗。
@@ -148,6 +185,7 @@ Vant 中导出了以下 Dialog 相关的辅助函数：
 | --- | --- | --- | --- |
 | showDialog | 展示消息提示弹窗，默认包含确认按钮 | _options: DialogOptions_ | `Promise<void>` |
 | showConfirmDialog | 展示消息确认弹窗，默认包含确认和取消按钮 | _options: DialogOptions_ | `Promise<void>` |
+| showDestructiveDialog | 展示消息警示弹窗，默认包含警示和取消按钮 | _options: DialogOptions_ | `Promise<void>` |
 | closeDialog | 关闭当前展示的弹窗 | - | `void` |
 | setDialogDefaultOptions | 修改默认配置，影响所有的 `showDialog` 调用 | _options: DialogOptions_ | `void` |
 | resetDialogDefaultOptions | 重置默认配置，影响所有的 `showDialog` 调用 | - | `void` |
@@ -162,16 +200,22 @@ Vant 中导出了以下 Dialog 相关的辅助函数：
 | width | 弹窗宽度，默认单位为 `px` | _number \| string_ | `320px` |
 | message | 文本内容，支持通过 `\n` 换行 | _string \| () => JSX.ELement_ | - |
 | messageAlign | 内容对齐方式，可选值为 `left` `right` | _string_ | `center` |
+| footerActions | 底部操作按钮 | _Array_ | - |
+| longText | 是否渲染长文本 | _boolean_ | `false` |
 | theme | 样式风格，可选值为 `round-button` | _string_ | `default` |
 | className | 自定义类名 | _string \| Array \| object_ | - |
 | showConfirmButton | 是否展示确认按钮 | _boolean_ | `true` |
 | showCancelButton | 是否展示取消按钮 | _boolean_ | `false` |
+| showDestructiveButton | 是否展示警示按钮 | _boolean_ | `false` |
 | confirmButtonText | 确认按钮文案 | _string_ | `确认` |
 | confirmButtonColor | 确认按钮颜色 | _string_ | `#ee0a24` |
 | confirmButtonDisabled | 是否禁用确认按钮 | _boolean_ | `false` |
 | cancelButtonText | 取消按钮文案 | _string_ | `取消` |
 | cancelButtonColor | 取消按钮颜色 | _string_ | `black` |
 | cancelButtonDisabled | 是否禁用取消按钮 | _boolean_ | `false` |
+| destructiveButtonText | 警示按钮文案 | _string_ | `` |
+| destructiveButtonColor | 警示按钮颜色 | _string_ | `#FF2525` |
+| destructiveButtonDisabled | 是否禁用警示按钮 | _boolean_ | `false` |
 | overlay | 是否展示遮罩层 | _boolean_ | `true` |
 | overlayClass | 自定义遮罩层类名 | _string \| Array \| object_ | - |
 | overlayStyle | 自定义遮罩层样式 | _object_ | - |
@@ -194,15 +238,21 @@ Vant 中导出了以下 Dialog 相关的辅助函数：
 | width | 弹窗宽度，默认单位为 `px` | _number \| string_ | `320px` |
 | message | 文本内容，支持通过 `\n` 换行 | _string \| () => JSX.Element_ | - |
 | message-align | 内容水平对齐方式，可选值为 `left` `right` `justify` | _string_ | `center` |
+| foote-actions | 底部操作按钮 | _Array_ | - |
+| long-text | 是否渲染长文本 | _boolean_ | `false` |
 | theme | 样式风格，可选值为 `round-button` | _string_ | `default` |
 | show-confirm-button | 是否展示确认按钮 | _boolean_ | `true` |
 | show-cancel-button | 是否展示取消按钮 | _boolean_ | `false` |
+| show-destructive-button | 是否展示警示按钮 | _boolean_ | `false` |
 | confirm-button-text | 确认按钮文案 | _string_ | `确认` |
 | confirm-button-color | 确认按钮颜色 | _string_ | `#ee0a24` |
 | confirm-button-disabled | 是否禁用确认按钮 | _boolean_ | `false` |
 | cancel-button-text | 取消按钮文案 | _string_ | `取消` |
 | cancel-button-color | 取消按钮颜色 | _string_ | `black` |
 | cancel-button-disabled | 是否禁用取消按钮 | _boolean_ | `false` |
+| destructive-button-text | 警示按钮文案 | _string_ | `` |
+| destructive-button-color | 警示按钮颜色 | _string_ | `#FF2525` |
+| destructive-button-disabled | 是否禁用警示按钮 | _boolean_ | `false` |
 | z-index | 将弹窗的 z-index 层级设置为一个固定值 | _number \| string_ | `2000+` |
 | overlay | 是否展示遮罩层 | _boolean_ | `true` |
 | overlay-class | 自定义遮罩层类名 | _string_ | - |

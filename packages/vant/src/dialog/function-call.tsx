@@ -10,6 +10,7 @@ const DEFAULT_OPTIONS = {
   width: '',
   theme: null,
   message: '',
+  footerActions: null,
   overlay: true,
   callback: null,
   teleport: 'body',
@@ -20,6 +21,7 @@ const DEFAULT_OPTIONS = {
   beforeClose: null,
   overlayClass: '',
   overlayStyle: undefined,
+  longText: false,
   messageAlign: '',
   cancelButtonText: '',
   cancelButtonColor: null,
@@ -29,6 +31,10 @@ const DEFAULT_OPTIONS = {
   confirmButtonDisabled: false,
   showConfirmButton: true,
   showCancelButton: false,
+  destructiveButtonText: '',
+  destructiveButtonColor: '',
+  destructiveButtonDisabled: false,
+  showDestructiveButton: false,
   closeOnPopstate: true,
   closeOnClickOverlay: false,
 } as const;
@@ -65,7 +71,7 @@ export function showDialog(
     instance.open(
       extend({}, currentOptions, options, {
         callback: (action?: DialogAction) => {
-          (action === 'confirm' ? resolve : reject)(action);
+          (action !== 'cancel' ? resolve : reject)(action);
         },
       }),
     );
@@ -91,6 +97,21 @@ export const resetDialogDefaultOptions = () => {
  */
 export const showConfirmDialog = (options: DialogOptions) =>
   showDialog(extend({ showCancelButton: true }, options));
+
+/**
+ * Display a message destructive dialog with default destructive and cancel buttons
+ */
+export const showDestructiveDialog = (options: DialogOptions) =>
+  showDialog(
+    extend(
+      {
+        showCancelButton: true,
+        showConfirmButton: false,
+        showDestructiveButton: true,
+      },
+      options,
+    ),
+  );
 
 /**
  * Close the currently displayed dialog
